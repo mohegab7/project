@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:opennutritracker/core/presentation/widgets/app_banner_version.dart';
 import 'package:opennutritracker/core/utils/app_const.dart';
@@ -108,6 +107,7 @@ class _OnboardingIntroPageBodyState extends State<OnboardingIntroPageBody> {
     });
   }
 
+  // ignore: unused_element
   Future<void> _launchUrl() async {
     if (!await launchUrl(Uri.parse(URLConst.privacyPolicyURLEn),
         mode: LaunchMode.externalApplication)) {}
