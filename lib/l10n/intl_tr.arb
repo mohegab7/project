@@ -2,8 +2,8 @@
   "appTitle": "active_fit",
   "appVersionName": "Sürüm {versionNumber}",
   "appDescription": "active_fit, gizliliğinize saygı duyan ücretsiz ve açık kaynaklı bir kalori ve besin takipçisidir.",
-  "alphaVersionName": "[Alfa]",
-  "betaVersionName": "[Beta]",
+  "alphaVersionName": "",
+  "betaVersionName": "",
 
   "addLabel": "Ekle",
   "createCustomDialogTitle": "Özel yemek öğesi oluşturulsun mu?",

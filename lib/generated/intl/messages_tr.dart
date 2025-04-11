@@ -55,7 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("GPL-3.0 lisansı"),
         "appTitle": MessageLookupByLibrary.simpleMessage("active_fit"),
         "appVersionName": m0,
-        "betaVersionName": MessageLookupByLibrary.simpleMessage("[Beta]"),
+        "betaVersionName": MessageLookupByLibrary.simpleMessage(""),
         "bmiInfo": MessageLookupByLibrary.simpleMessage(
             "Vücut Kitle İndeksi (VKİ), yetişkinlerde aşırı kilolu ve obeziteyi sınıflandırmak için kullanılan bir indekstir. Kilogram cinsinden ağırlığın, metre cinsinden boyun karesine bölünmesiyle hesaplanır (kg/m²).\n\nVKİ, yağ ve kas kütlesi arasında ayrım yapmaz ve bazı bireyler için yanıltıcı olabilir."),
         "bmiLabel": MessageLookupByLibrary.simpleMessage("VKİ"),

@@ -93,7 +93,7 @@ class S {
   /// `[Beta]`
   String get betaVersionName {
     return Intl.message(
-      '[Beta]',
+      '',
       name: 'betaVersionName',
       desc: '',
       args: [],
