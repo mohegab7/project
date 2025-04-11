@@ -1,3 +1,5 @@
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:get_it/get_it.dart';
 import 'package:active_fit/core/data/data_source/config_data_source.dart';
 import 'package:active_fit/core/data/data_source/intake_data_source.dart';
 import 'package:active_fit/core/data/data_source/physical_activity_data_source.dart';
@@ -26,6 +28,7 @@ import 'package:active_fit/core/domain/usecase/get_tracked_day_usecase.dart';
 import 'package:active_fit/core/domain/usecase/get_user_activity_usecase.dart';
 import 'package:active_fit/core/domain/usecase/get_user_usecase.dart';
 import 'package:active_fit/core/domain/usecase/update_intake_usecase.dart';
+import 'package:active_fit/core/utils/env.dart';
 import 'package:active_fit/core/utils/hive_db_provider.dart';
 import 'package:active_fit/core/utils/ont_image_cache_manager.dart';
 import 'package:active_fit/core/utils/secure_app_storage_provider.dart';
@@ -34,6 +37,7 @@ import 'package:active_fit/features/add_activity/presentation/bloc/activities_bl
 import 'package:active_fit/features/add_activity/presentation/bloc/recent_activities_bloc.dart';
 import 'package:active_fit/features/add_meal/data/data_sources/fdc_data_source.dart';
 import 'package:active_fit/features/add_meal/data/data_sources/off_data_source.dart';
+import 'package:active_fit/features/add_meal/data/data_sources/sp_fdc_data_source.dart';
 import 'package:active_fit/features/add_meal/data/repository/products_repository.dart';
 import 'package:active_fit/features/add_meal/domain/usecase/search_products_usecase.dart';
 import 'package:active_fit/features/add_meal/presentation/bloc/add_meal_bloc.dart';
@@ -50,8 +54,7 @@ import 'package:active_fit/features/profile/presentation/bloc/profile_bloc.dart'
 import 'package:active_fit/features/scanner/domain/usecase/search_product_by_barcode_usecase.dart';
 import 'package:active_fit/features/scanner/presentation/scanner_bloc.dart';
 import 'package:active_fit/features/settings/presentation/bloc/settings_bloc.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:get_it/get_it.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 final locator = GetIt.instance;
 
@@ -61,6 +64,11 @@ Future<void> initLocator() async {
   final hiveDBProvider = HiveDBProvider();
   await hiveDBProvider
       .initHiveDB(await secureAppStorageProvider.getHiveEncryptionKey());
+
+  // Backend
+  await Supabase.initialize(
+      url: Env.supabaseProjectUrl, anonKey: Env.supabaseProjectAnonKey);
+  locator.registerLazySingleton<SupabaseClient>(() => Supabase.instance.client);
 
   // Cache manager
   locator
@@ -168,6 +176,7 @@ Future<void> initLocator() async {
       () => PhysicalActivityDataSource());
   locator.registerLazySingleton<OFFDataSource>(() => OFFDataSource());
   locator.registerLazySingleton<FDCDataSource>(() => FDCDataSource());
+  locator.registerLazySingleton<SpFdcDataSource>(() => SpFdcDataSource());
   locator.registerLazySingleton(
       () => TrackedDayDataSource(hiveDBProvider.trackedDayBox));
 

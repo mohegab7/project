@@ -1,12 +1,14 @@
+// import 'package:active_fit/features/dashboard/dashboard.dart';
+// import 'package:active_fit/features/login/login_screen.dart';
+// import 'package:active_fit/features/register/Register_screen.dart';
+import 'package:active_fit/model/constants/CaheHelper.dart';
+import 'package:active_fit/model/constants/bloc_ofserver.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:logging/logging.dart';
-import 'package:provider/provider.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
-
 import 'package:active_fit/core/data/data_source/user_data_source.dart';
 import 'package:active_fit/core/data/repository/config_repository.dart';
 import 'package:active_fit/core/domain/entity/app_theme_entity.dart';
@@ -20,19 +22,16 @@ import 'package:active_fit/core/utils/logger_config.dart';
 import 'package:active_fit/core/utils/navigation_options.dart';
 import 'package:active_fit/core/utils/theme_mode_provider.dart';
 import 'package:active_fit/features/activity_detail/activity_detail_screen.dart';
-import 'package:active_fit/features/add_activity/presentation/add_activity_screen.dart';
 import 'package:active_fit/features/add_meal/presentation/add_meal_screen.dart';
-import 'package:active_fit/features/dashboard/dashboard.dart';
+import 'package:active_fit/features/add_activity/presentation/add_activity_screen.dart';
 import 'package:active_fit/features/edit_meal/presentation/edit_meal_screen.dart';
-import 'package:active_fit/features/login/login_screen.dart';
-import 'package:active_fit/features/meal_detail/meal_detail_screen.dart';
 import 'package:active_fit/features/onboarding/onboarding_screen.dart';
-import 'package:active_fit/features/register/Register_screen.dart';
 import 'package:active_fit/features/scanner/scanner_screen.dart';
+import 'package:active_fit/features/meal_detail/meal_detail_screen.dart';
 import 'package:active_fit/features/settings/settings_screen.dart';
 import 'package:active_fit/generated/l10n.dart';
-import 'package:active_fit/model/constants/CaheHelper.dart';
-import 'package:active_fit/model/constants/bloc_ofserver.dart';
+import 'package:provider/provider.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -73,12 +72,12 @@ void runAppWithChangeNotifiers(
         bool userInitialized, AppThemeEntity savedAppTheme) =>
     runApp(ChangeNotifierProvider(
         create: (_) => ThemeModeProvider(appTheme: savedAppTheme),
-        child: ActiveFitApp(userInitialized: userInitialized)));
+        child: active_fitApp(userInitialized: userInitialized)));
 
-class ActiveFitApp extends StatelessWidget {
+class active_fitApp extends StatelessWidget {
   final bool userInitialized;
 
-  const ActiveFitApp({super.key, required this.userInitialized});
+  const active_fitApp({super.key, required this.userInitialized});
 
   @override
   Widget build(BuildContext context) {
@@ -86,16 +85,15 @@ class ActiveFitApp extends StatelessWidget {
       onGenerateTitle: (context) => S.of(context).appTitle,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: lightColorScheme,
-        textTheme: appTextTheme,
-      ),
+          useMaterial3: true,
+          colorScheme: lightColorScheme,
+          textTheme: appTextTheme),
       darkTheme: ThemeData(
           useMaterial3: true,
           colorScheme: darkColorScheme,
           textTheme: appTextTheme),
       themeMode: Provider.of<ThemeModeProvider>(context).themeMode,
-      localizationsDelegates: [
+      localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
@@ -103,8 +101,8 @@ class ActiveFitApp extends StatelessWidget {
       ],
       supportedLocales: S.delegate.supportedLocales,
       initialRoute: userInitialized
-          ? NavigationOptions.loginScreen
-          : NavigationOptions.onboardingRoute,
+          ? NavigationOptions.mainRoute
+          : NavigationOptions.mainRoute,
       routes: {
         NavigationOptions.mainRoute: (context) => const MainScreen(),
         NavigationOptions.onboardingRoute: (context) =>
@@ -121,15 +119,9 @@ class ActiveFitApp extends StatelessWidget {
             const ActivityDetailScreen(),
         NavigationOptions.imageFullScreenRoute: (context) =>
             const ImageFullScreen(),
-        NavigationOptions.loginScreen: (context) => LoginScreen(),
-        NavigationOptions.registerScreen: (context) => RegisterScreen(),
-        NavigationOptions.dashboard: (context) => const Dashboard_Screen(),
-      },
-      builder: (context, child) {
-        return Scaffold(
-          body: child,
-          bottomSheet: null,
-        );
+            //  NavigationOptions.loginScreen: (context) => LoginScreen(),
+        // NavigationOptions.registerScreen: (context) => RegisterScreen(),
+        // NavigationOptions.dashboard: (context) => const Dashboard_Screen(),
       },
     );
   }

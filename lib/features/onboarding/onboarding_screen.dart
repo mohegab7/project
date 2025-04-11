@@ -1,5 +1,4 @@
 import 'package:active_fit/core/utils/locator.dart';
-import 'package:active_fit/core/utils/navigation_options.dart';
 import 'package:active_fit/features/onboarding/domain/entity/user_activity_selection_entity.dart';
 import 'package:active_fit/features/onboarding/domain/entity/user_gender_selection_entity.dart';
 import 'package:active_fit/features/onboarding/domain/entity/user_goal_selection_entity.dart';
@@ -269,7 +268,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     if (userEntity != null) {
       _onboardingBloc.saveOnboardingData(
           context, userEntity, hasAcceptedDataCollection, usesImperialUnits);
-      Navigator.pushReplacementNamed(context, NavigationOptions.loginScreen);
+      // Navigator.pushReplacementNamed(context, NavigationOptions.loginScreen);
     } else {
       // Error with user input
       ScaffoldMessenger.of(context).showSnackBar(

@@ -1,13 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:active_fit/core/presentation/widgets/add_item_bottom_sheet.dart';
-import 'package:active_fit/core/presentation/widgets/home_appbar.dart';
-import 'package:active_fit/core/presentation/widgets/main_appbar.dart';
-import 'package:active_fit/features/camera_scanner/camera_page.dart';
 import 'package:active_fit/features/diary/diary_page.dart';
+import 'package:active_fit/core/presentation/widgets/home_appbar.dart';
 import 'package:active_fit/features/home/home_page.dart';
+import 'package:active_fit/core/presentation/widgets/main_appbar.dart';
 import 'package:active_fit/features/profile/profile_page.dart';
 import 'package:active_fit/generated/l10n.dart';
-import 'package:flutter/material.dart';
-
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -27,15 +25,13 @@ class _MainScreenState extends State<MainScreen> {
     _bodyPages = [
       const HomePage(),
       const DiaryPage(),
-      const Camera_Page(),
       const ProfilePage(),
     ];
     _appbarPages = [
       const HomeAppbar(),
       MainAppbar(title: S.of(context).diaryLabel, iconData: Icons.book),
-      MainAppbar(title: 'Camera', iconData: Icons.camera_alt),
       MainAppbar(
-          title: S.of(context).profileLabel, iconData: Icons.account_circle),
+          title: S.of(context).profileLabel, iconData: Icons.account_circle)
     ];
     super.didChangeDependencies();
   }
@@ -68,14 +64,9 @@ class _MainScreenState extends State<MainScreen> {
               label: S.of(context).diaryLabel),
           NavigationDestination(
               icon: _selectedPageIndex == 2
-                  ? const Icon(Icons.camera_alt)
-                  : const Icon(Icons.camera_alt_outlined),
-              label: 'Camera'),
-          NavigationDestination(
-              icon: _selectedPageIndex == 3
                   ? const Icon(Icons.account_circle)
                   : const Icon(Icons.account_circle_outlined),
-              label: S.of(context).profileLabel),
+              label: S.of(context).profileLabel)
         ],
       ),
     );
