@@ -9,4 +9,7 @@ class NavigationOptions {
   static const addActivityRoute = "addActivity";
   static const activityDetailRoute = "activityDetail";
   static const imageFullScreenRoute = "imageFullScreen";
+  static const loginScreen = "loginScreen";
+  static const registerScreen = "registerScreen";
+  static const dashboard = "dashboard";
 }

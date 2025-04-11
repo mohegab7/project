@@ -1,3 +1,4 @@
+import 'package:active_fit/features/add_meal/data/data_sources/sp_fdc_data_source.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get_it/get_it.dart';
 import 'package:active_fit/core/data/data_source/config_data_source.dart';
@@ -37,7 +38,6 @@ import 'package:active_fit/features/add_activity/presentation/bloc/activities_bl
 import 'package:active_fit/features/add_activity/presentation/bloc/recent_activities_bloc.dart';
 import 'package:active_fit/features/add_meal/data/data_sources/fdc_data_source.dart';
 import 'package:active_fit/features/add_meal/data/data_sources/off_data_source.dart';
-import 'package:active_fit/features/add_meal/data/data_sources/sp_fdc_data_source.dart';
 import 'package:active_fit/features/add_meal/data/repository/products_repository.dart';
 import 'package:active_fit/features/add_meal/domain/usecase/search_products_usecase.dart';
 import 'package:active_fit/features/add_meal/presentation/bloc/add_meal_bloc.dart';

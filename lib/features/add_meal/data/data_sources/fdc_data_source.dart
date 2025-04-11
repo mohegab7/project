@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:active_fit/core/utils/env.dart';
-import 'package:active_fit/features/add_meal/data/dto/fdc/fdc_const.dart';
 import 'package:active_fit/features/add_meal/data/dto/fdc/fdc_word_response_dto.dart';
 import 'package:logging/logging.dart';
 
@@ -28,7 +26,7 @@ class FDCDataSource {
           return FDCWordResponseDTO.fromJson(jsonResponse);
         } else {
           log.warning("'foods' field is null or not a list");
-          return FDCWordResponseDTO(foods: []); // إرجاع قائمة فارغة
+          return FDCWordResponseDTO(foods: [], totalHits: 0, currentPage: 0); // إرجاع قائمة فارغة
         }
       } else {
         log.severe("Failed to fetch data. Status code: ${response.statusCode}");

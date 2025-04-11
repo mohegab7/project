@@ -1,6 +1,9 @@
 // import 'package:active_fit/features/dashboard/dashboard.dart';
 // import 'package:active_fit/features/login/login_screen.dart';
 // import 'package:active_fit/features/register/Register_screen.dart';
+// import 'package:active_fit/features/dashboard/dashboard.dart';
+// import 'package:active_fit/features/login/login_screen.dart';
+// import 'package:active_fit/features/register/Register_screen.dart';
 import 'package:active_fit/model/constants/CaheHelper.dart';
 import 'package:active_fit/model/constants/bloc_ofserver.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -119,7 +122,7 @@ class active_fitApp extends StatelessWidget {
             const ActivityDetailScreen(),
         NavigationOptions.imageFullScreenRoute: (context) =>
             const ImageFullScreen(),
-            //  NavigationOptions.loginScreen: (context) => LoginScreen(),
+        //      NavigationOptions.loginScreen: (context) => LoginScreen(),
         // NavigationOptions.registerScreen: (context) => RegisterScreen(),
         // NavigationOptions.dashboard: (context) => const Dashboard_Screen(),
       },
