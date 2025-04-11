@@ -147,7 +147,7 @@ Future<void> initLocator() async {
   locator.registerLazySingleton<IntakeRepository>(
       () => IntakeRepository(locator()));
   locator.registerLazySingleton<ProductsRepository>(
-      () => ProductsRepository(locator(), locator()));
+      () => ProductsRepository(locator(), locator(), locator()));
   locator.registerLazySingleton<UserActivityRepository>(
       () => UserActivityRepository(locator()));
   locator.registerLazySingleton<PhysicalActivityRepository>(

@@ -26,7 +26,7 @@ class FDCDataSource {
           return FDCWordResponseDTO.fromJson(jsonResponse);
         } else {
           log.warning("'foods' field is null or not a list");
-          return FDCWordResponseDTO(foods: []); // إرجاع قائمة فارغة
+          return FDCWordResponseDTO(foods: [], totalHits: 0, currentPage: 0); // إرجاع قائمة فارغة
         }
       } else {
         log.severe("Failed to fetch data. Status code: ${response.statusCode}");
