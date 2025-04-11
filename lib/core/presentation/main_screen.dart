@@ -1,3 +1,4 @@
+import 'package:active_fit/features/camera_scanner/camera_page.dart';
 import 'package:flutter/material.dart';
 import 'package:active_fit/core/presentation/widgets/add_item_bottom_sheet.dart';
 import 'package:active_fit/features/diary/diary_page.dart';
@@ -25,11 +26,13 @@ class _MainScreenState extends State<MainScreen> {
     _bodyPages = [
       const HomePage(),
       const DiaryPage(),
+      const Camera_Page(),
       const ProfilePage(),
     ];
     _appbarPages = [
       const HomeAppbar(),
       MainAppbar(title: S.of(context).diaryLabel, iconData: Icons.book),
+      MainAppbar(title: 'Camera', iconData: Icons.camera_alt),
       MainAppbar(
           title: S.of(context).profileLabel, iconData: Icons.account_circle)
     ];
@@ -62,6 +65,11 @@ class _MainScreenState extends State<MainScreen> {
                   ? const Icon(Icons.book)
                   : const Icon((Icons.book_outlined)),
               label: S.of(context).diaryLabel),
+              NavigationDestination(
+              icon: _selectedPageIndex == 2
+                  ? const Icon(Icons.camera_alt)
+                  : const Icon(Icons.camera_alt_outlined),
+              label: 'Camera'),
           NavigationDestination(
               icon: _selectedPageIndex == 2
                   ? const Icon(Icons.account_circle)
