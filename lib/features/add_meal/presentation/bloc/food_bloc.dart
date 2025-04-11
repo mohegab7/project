@@ -30,7 +30,6 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
         emit(FoodLoadedState(food: result));
       } catch (error, stackTrace) {
         print("Error loading food: $error");
-        print("Stack trace: $stackTrace");
         emit(FoodFailedState());
       }
     });

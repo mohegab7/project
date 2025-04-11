@@ -1,49 +1,52 @@
 import 'package:active_fit/features/add_meal/data/data_sources/fdc_data_source.dart';
 import 'package:active_fit/features/add_meal/data/data_sources/off_data_source.dart';
-import 'package:active_fit/features/add_meal/data/data_sources/sp_fdc_data_source.dart';
 import 'package:active_fit/features/add_meal/domain/entity/meal_entity.dart';
 
 class ProductsRepository {
   final OFFDataSource _offDataSource;
   final FDCDataSource _fdcDataSource;
-  final SpFdcDataSource _spBackendDataSource;
 
-  ProductsRepository(
-      this._offDataSource, this._fdcDataSource, this._spBackendDataSource);
+  ProductsRepository(this._offDataSource, this._fdcDataSource);
 
   Future<List<MealEntity>> getOFFProductsByString(String searchString) async {
-    final offWordResponse =
-        await _offDataSource.fetchSearchWordResults(searchString);
+    try {
+      final offWordResponse =
+          await _offDataSource.fetchSearchWordResults(searchString);
 
-    final products = offWordResponse.products
-        .map((offProduct) => MealEntity.fromOFFProduct(offProduct))
-        .toList();
+      final products = offWordResponse.products
+          .map((offProduct) => MealEntity.fromOFFProduct(offProduct))
+          .toList();
 
-    return products;
+      return products;
+    } catch (e) {
+      print("Error fetching OFF products: $e");
+      throw Exception("Error fetching OFF products: $e");
+    }
   }
 
   Future<List<MealEntity>> getFDCFoodsByString(String searchString) async {
-    final fdcWordResponse =
-        await _fdcDataSource.fetchSearchWordResults(searchString);
-    final products = fdcWordResponse.foods
-        .map((food) => MealEntity.fromFDCFood(food))
-        .toList();
-    return products;
-  }
-
-  Future<List<MealEntity>> getSupabaseFDCFoodsByString(
-      String searchString) async {
-    final spFdcWordResponse =
-        await _spBackendDataSource.fetchSearchWordResults(searchString);
-    final products = spFdcWordResponse
-        .map((foodItem) => MealEntity.fromSpFDCFood(foodItem))
-        .toList();
-    return products;
+    try {
+      final fdcWordResponse =
+          await _fdcDataSource.fetchSearchWordResults(searchString);
+      final products = fdcWordResponse.foods
+          .map((food) => MealEntity.fromFDCFood(food))
+          .toList();
+      print("FDC products fetched: ${products.length} items"); // Debugging
+      return products;
+    } catch (e) {
+      print("Error fetching FDC foods: $e");
+      throw Exception("Error fetching FDC foods: $e");
+    }
   }
 
   Future<MealEntity> getOFFProductByBarcode(String barcode) async {
-    final productResponse = await _offDataSource.fetchBarcodeResults(barcode);
+    try {
+      final productResponse = await _offDataSource.fetchBarcodeResults(barcode);
 
-    return MealEntity.fromOFFProduct(productResponse.product);
+      return MealEntity.fromOFFProduct(productResponse.product);
+    } catch (e) {
+      print("Error fetching OFF product by barcode: $e");
+      throw Exception("Error fetching OFF product by barcode: $e");
+    }
   }
 }
