@@ -20,17 +20,20 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
   FoodBloc(this._searchProductUseCase, this._getConfigUsecase)
       : super(FoodInitial()) {
     on<LoadFoodEvent>((event, emit) async {
-      print("LoadFoodEvent received with searchString: ${event.searchString}");
+      // print("LoadFoodEvent received with searchString: ${event.searchString}");
+      _searchString = event.searchString;
       emit(FoodLoadingState());
 
       try {
         final result = await _searchProductUseCase
-            .searchFDCFoodByString(event.searchString)
-            .timeout(const Duration(seconds: 10)); // مهلة زمنية مناسبة
-        emit(FoodLoadedState(food: result));
-      } catch (error, stackTrace) {
+            .searchFDCFoodByString(_searchString);
+            // .timeout(const Duration(seconds: 10)); // 
+            final config=await _getConfigUsecase.getConfig();
+        emit(FoodLoadedState(food: result,usesImperialUnits: config.usesImperialUnits));
+      } catch (error) {
+        log.severe(error);
         print("Error loading food: $error");
-        print("Stack trace: $stackTrace");
+        // print("Stack trace: $stackTrace");
         emit(FoodFailedState());
       }
     });

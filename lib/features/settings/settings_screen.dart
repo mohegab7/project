@@ -32,6 +32,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   late HomeBloc _homeBloc;
   late DiaryBloc _diaryBloc;
   late CalendarDayBloc _calendarDayBloc;
+  final Uri _url = Uri.parse('https://guileless-mousse-213f63.netlify.app/');
 
   @override
   void initState() {
@@ -290,8 +291,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
           return const DisclaimerDialog();
         });
   }
-
+Future<void> _launchUrl() async {
+    if (!await launchUrl(_url)) {
+      throw 'Could not launch $_url';
+    }
+  }
   void _showReportErrorDialog(BuildContext context) {
+    
     showDialog(
         context: context,
         builder: (context) {
@@ -306,8 +312,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   child: Text(S.of(context).dialogCancelLabel)),
               TextButton(
                   onPressed: () async {
-                    _reportError(context);
-                    Navigator.of(context).pop();
+                    
+                    _launchUrl();
+                  
                   },
                   child: Text(S.of(context).dialogOKLabel))
             ],
@@ -315,20 +322,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
         });
   }
 
-  Future<void> _reportError(BuildContext context) async {
-    final reportUri =
-        Uri.parse("mailto:${AppConst.reportErrorEmail}?subject=Report_Error");
+  // ignore: unused_element
+  // Future<void> _reportError(BuildContext context) async {
+  //   final reportUri =
+  //       Uri.parse("mailto:${AppConst.reportErrorEmail}?subject=Report_Error");
 
-    if (await canLaunchUrl(reportUri)) {
-      launchUrl(reportUri);
-    } else {
-      // Cannot open email app, show error snackbar
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(S.of(context).errorOpeningEmail)));
-      }
-    }
-  }
+  //   if (await canLaunchUrl(reportUri)) {
+  //     launchUrl(reportUri);
+  //   } else {
+  //     // Cannot open email app, show error snackbar
+  //     if (context.mounted) {
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //           SnackBar(content: Text(S.of(context).errorOpeningEmail)));
+  //     }
+  //   }
+  // }
 
   // void _showPrivacyDialog(
   //     BuildContext context, bool hasAcceptedAnonymousData) async {
