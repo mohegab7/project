@@ -53,7 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "active_fit, gizliliğinize saygı duyan ücretsiz ve açık kaynaklı bir kalori ve besin takipçisidir."),
         "appLicenseLabel":
             MessageLookupByLibrary.simpleMessage("GPL-3.0 lisansı"),
-        "appTitle": MessageLookupByLibrary.simpleMessage("active_fit"),
+        "appTitle": MessageLookupByLibrary.simpleMessage("active fit"),
         "appVersionName": m0,
         "betaVersionName": MessageLookupByLibrary.simpleMessage(""),
         "bmiInfo": MessageLookupByLibrary.simpleMessage(

@@ -1,7 +1,6 @@
 import 'package:active_fit/core/domain/entity/app_theme_entity.dart';
 import 'package:active_fit/core/presentation/widgets/app_banner_version.dart';
 import 'package:active_fit/core/presentation/widgets/disclaimer_dialog.dart';
-import 'package:active_fit/core/utils/app_const.dart';
 import 'package:active_fit/core/utils/locator.dart';
 import 'package:active_fit/core/utils/theme_mode_provider.dart';
 import 'package:active_fit/features/diary/presentation/bloc/calendar_day_bloc.dart';

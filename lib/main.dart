@@ -1,9 +1,3 @@
-// import 'package:active_fit/features/dashboard/dashboard.dart';
-// import 'package:active_fit/features/login/login_screen.dart';
-// import 'package:active_fit/features/register/Register_screen.dart';
-// import 'package:active_fit/features/dashboard/dashboard.dart';
-// import 'package:active_fit/features/login/login_screen.dart';
-// import 'package:active_fit/features/register/Register_screen.dart';
 import 'package:active_fit/features/dashboard/dashboard.dart';
 import 'package:active_fit/features/login/login_screen.dart';
 import 'package:active_fit/features/register/Register_screen.dart';
@@ -107,7 +101,7 @@ class active_fitApp extends StatelessWidget {
       // home:,
       supportedLocales: S.delegate.supportedLocales,
       initialRoute: userInitialized
-          ? NavigationOptions.mainRoute
+          ? NavigationOptions.onboardingRoute
           : NavigationOptions.onboardingRoute,
       routes: {
         NavigationOptions.mainRoute: (context) => const MainScreen(),
